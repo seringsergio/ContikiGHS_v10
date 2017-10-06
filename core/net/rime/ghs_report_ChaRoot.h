@@ -38,7 +38,7 @@ typedef struct informacion_list informacion_list;
 
 //msg
 process_event_t e_msg_report;
-process_event_t e_msg_ghs_end;
+//process_event_t e_msg_ghs_end;
 /*-------------------------------------------------------------------*/
 /*---------------- ESTRUCTURAS---------------------------------------*/
 /*-------------------------------------------------------------------*/

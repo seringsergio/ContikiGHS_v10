@@ -293,7 +293,8 @@ PROCESS_THREAD(e_LWOE, ev, data)
                                 process_post(&master_co_i, e_found, NULL);
                                 nd.state = FOUND;   //Para saber en que estado estoy en cualquier parte
                                 //paso a END
-                                process_post(&master_co_i, e_msg_ghs_end, NULL);
+                                //process_post(&master_co_i, e_msg_ghs_end, NULL);
+                                print_final_result();
                             }else //No he terminado aun los 2 reportes NO son infinito
                             {
                                     MY_DBG("nd.lwoe.node.weight=%d.%02d <= nd.lwoe.children.weight=%d.%02d \n",
@@ -360,10 +361,10 @@ PROCESS_THREAD(e_LWOE, ev, data)
 
                             if( num_hijos(e_list_head_g) == 1 )
                             {
-                                if(nd.lwoe.node.weight == INFINITO)
-                                {
-                                    process_post(&master_co_i, e_msg_ghs_end, NULL);
-                                }
+                                //if(nd.lwoe.node.weight == INFINITO)
+                                //{
+                                    //process_post(&master_co_i, e_msg_ghs_end, NULL);
+                                //}
                                 //send REPORT
                                 rp_list_out_p = memb_alloc(&rp_mem_out); //Alocar memoria
                                 if(rp_list_out_p == NULL)
@@ -406,10 +407,10 @@ PROCESS_THREAD(e_LWOE, ev, data)
 
                                 if( nd.lwoe.node.weight <= nd.lwoe.children.weight ) //Si es mejor MI edge
                                 {
-                                    if(nd.lwoe.node.weight == INFINITO)
-                                    {
-                                        process_post(&master_co_i, e_msg_ghs_end, NULL);
-                                    }
+                                    //if(nd.lwoe.node.weight == INFINITO)
+                                    //{
+                                        //process_post(&master_co_i, e_msg_ghs_end, NULL);
+                                    //}
 
                                     //send REPORT
                                     rp_list_out_p = memb_alloc(&rp_mem_out); //Alocar memoria
@@ -430,10 +431,10 @@ PROCESS_THREAD(e_LWOE, ev, data)
 
                                }else
                                {
-                                   if(nd.lwoe.children.weight == INFINITO)
-                                   {
-                                       process_post(&master_co_i, e_msg_ghs_end, NULL);
-                                   }
+                                   //if(nd.lwoe.children.weight == INFINITO)
+                                   //{
+                                       //process_post(&master_co_i, e_msg_ghs_end, NULL);
+                                   //}
                                    //send REPORT
                                    rp_list_out_p = memb_alloc(&rp_mem_out); //Alocar memoria
                                    if(rp_list_out_p == NULL)
@@ -471,10 +472,10 @@ PROCESS_THREAD(e_LWOE, ev, data)
 
                         if( nd.lwoe.node.weight <= nd.lwoe.children.weight ) //Si es mejor MI edge
                         {
-                            if(nd.lwoe.node.weight == INFINITO)
-                            {
-                                process_post(&master_co_i, e_msg_ghs_end, NULL);
-                            }
+                            //if(nd.lwoe.node.weight == INFINITO)
+                            //{
+                                //process_post(&master_co_i, e_msg_ghs_end, NULL);
+                            //}
                             //send_report y paso a estado FOUND
                             rp_list_out_p = memb_alloc(&rp_mem_out); //Alocar memoria
                             if(rp_list_out_p == NULL)
@@ -497,10 +498,10 @@ PROCESS_THREAD(e_LWOE, ev, data)
 
                         }else //Si es mejor el edge de un vecino
                         {
-                            if(nd.lwoe.children.weight == INFINITO)
-                            {
-                                process_post(&master_co_i, e_msg_ghs_end, NULL);
-                            }
+                            //if(nd.lwoe.children.weight == INFINITO)
+                            //{
+                                //process_post(&master_co_i, e_msg_ghs_end, NULL);
+                            //}
                             //send_report y paso a estado FOUND
                             rp_list_out_p = memb_alloc(&rp_mem_out); //Alocar memoria
                             if(rp_list_out_p == NULL)
@@ -524,10 +525,10 @@ PROCESS_THREAD(e_LWOE, ev, data)
                     }else //SI NO estan seteados los dos
                     if( (es_Hoja()) && (nd.flags & ND_LWOE) )
                     {
-                        if(nd.lwoe.node.weight == INFINITO)
-                        {
-                            process_post(&master_co_i, e_msg_ghs_end, NULL);
-                        }
+                        //if(nd.lwoe.node.weight == INFINITO)
+                        //{
+                            //process_post(&master_co_i, e_msg_ghs_end, NULL);
+                        //}
                         //send REPORT
                         rp_list_out_p = memb_alloc(&rp_mem_out); //Alocar memoria
                         if(rp_list_out_p == NULL)
@@ -655,7 +656,7 @@ PROCESS_THREAD(send_message_report_ChaRoot, ev, data)
     //proceso report - ChangeRoot
     e_msg_report          = process_alloc_event(); // Darle un numero al evento
     e_msg_ch_root         = process_alloc_event(); // Darle un numero al evento
-    e_msg_ghs_end         = process_alloc_event(); // Darle un numero al evento
+    //e_msg_ghs_end         = process_alloc_event(); // Darle un numero al evento
 
     list_init(history_list);
     memb_init(&history_mem);

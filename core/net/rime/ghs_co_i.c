@@ -6,6 +6,75 @@
 /*---------------- FUNCIONES-----------------------------------------*/
 /*-------------------------------------------------------------------*/
 
+/* Contexto: Para hacer self-healing se dividio en 2 partes la test_list. La primera parte
+   es construir la topologia con GHS algorithm. La segunda parte es hacer auto-curacion
+   tomando como base la topologia ya conocida. Para recolectar la informacion de la primera parte,
+   es decir, para guardar la informacion de la topologia se crea esta interface.
+   Interface: Es la interface entre el algoritmo GHS y la auto-curacion. Aca imprimo los edges y el padre,
+   luego esta informacion se carga en otra simulacion para hacer auto-curacion.
+*/
+
+
+/*void interface_GHS_and_Self_healing()
+{
+    char message[13];
+    char string[3];
+    char *filename = "G";
+    int fd_write, n, temp ;//, fd_read;
+    edges *e_aux; // Apuntador que apunta a la tabla de edges
+
+
+    for(e_aux = e_list_head_g; e_aux != NULL; e_aux = e_aux->next) // Recorrer toda la lista
+    {
+        if(linkaddr_cmp(&e_aux->addr, &nd.parent)) //Si es padra envio un 1
+        {
+            temp = sprintf(message, "%d %d %d %d.%02d %d",//va con pri ntf porque siempre quiero ver esto
+            linkaddr_node_addr.u8[0],
+            e_aux->addr.u8[0],
+            1, //El 1 indica que es PADRE
+            (int)(e_aux->weight / SEQNO_EWMA_UNITY), (int)(((100UL * e_aux->weight) / SEQNO_EWMA_UNITY) % 100),
+            e_aux->state);
+            MY_DBG("total number of characters written is = %d \n", temp);
+            MY_DBG("step 1: %s\n", message );
+
+
+        }else
+        {
+            temp = sprintf(message, "%d %d %d %d.%02d %d",//va con printf porque siempre quiero ver esto
+            linkaddr_node_addr.u8[0],
+            e_aux->addr.u8[0],
+            0, //El 1 indica que es PADRE
+            (int)(e_aux->weight / SEQNO_EWMA_UNITY), (int)(((100UL * e_aux->weight) / SEQNO_EWMA_UNITY) % 100),
+            e_aux->state);
+            MY_DBG("total number of bytes written is = %d \n", temp*sizeof(char));
+            MY_DBG("step 1: %s\n", message );
+
+        }
+        // writing to cfs
+        fd_write = cfs_open(filename, CFS_WRITE);
+        if(fd_write != -1) //El archivo se abre correctamente
+        {
+
+                  strcpy(string,"I");
+                  //n = cfs_write(fd_write, string, sizeof(string) );
+                  //if(n != -1) //El archivo se escribe correctamente
+                  //{
+                      //cfs_close(fd_write);
+                      //MY_DBG("step 2: successfully written to cfs. wrote %i bytes\n", n);
+                  //}
+                  //else
+                  //{
+                  //  MY_DBG("ERROR: No se pudo abrir el archivo %s para Escritura \n", filename);
+                  //}
+        } else
+        {
+          MY_DBG("ERROR: No se pudo abrir el archivo %s para Escritura \n", filename);
+        }
+
+    }
+
+}*/
+
 /* FUNCION que imprime el resultado final y definitivo
 */
 void print_final_result()
@@ -17,7 +86,7 @@ void print_final_result()
     {
         if(linkaddr_cmp(&e_aux->addr, &nd.parent)) //Solo muestro mi padre
         {
-            printf("%s %d %d %d.%02d %d %d.%02d \n",
+            printf("%s %d %d %d.%02d %d %d.%02d \n",//va con printf porque siempre quiero ver esto
             string,
             linkaddr_node_addr.u8[0],
             nd.parent.u8[0],
@@ -28,6 +97,10 @@ void print_final_result()
             (int)(((100UL * nd.f.name_str.weight) / SEQNO_EWMA_UNITY) % 100));
        }
    }
+
+   process_post(&interface_GHS_and_Self_healing, PROCESS_EVENT_CONTINUE, NULL);
+   //interface_GHS_and_Self_healing(); //Cuando llamo un final result lleno la interface con self-healing
+
 }
 
 
@@ -66,7 +139,7 @@ void print_edges_list(edges *e_list_head, char *string,  const linkaddr_t *node_
 
     for(e_aux = e_list_head; e_aux != NULL; e_aux = list_item_next(e_aux)) // Recorrer toda la lista
     {
-        MY_DBG("%s %d %d %d.%02d %d \n",
+        printf("%s %d %d %d.%02d %d \n",
               string,
               node_addr->u8[0],
               e_aux->addr.u8[0],

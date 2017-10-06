@@ -53,3 +53,7 @@ make login MOTES=/dev/ttyUSB0 | java ViewRSSI
 
 //Recordar como no sale el error de wrong password
 make  TARGET=sky node-environment.upload
+
+
+//Para saber el tamaño del codigo
+msp430-size example-ghs_neigh.sky

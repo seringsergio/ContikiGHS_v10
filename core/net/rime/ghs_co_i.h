@@ -9,6 +9,8 @@
 #include "ghs_algorithm.h"
 #include "net/rime/rime.h"
 #include <stdio.h>
+#include "cfs/cfs.h" //Contiki File System (CFS)
+
 
 /*-------------------------------------------------------------------*/
 /*---------------- Definiciones -------------------------------------*/
@@ -230,6 +232,8 @@ void llenar_initiate_msg_list (initiate_list *i_list_out_p, name name_str,
                         uint8_t level, uint8_t state, const linkaddr_t *dest, uint8_t flags);
 void become_core_node(linkaddr_t *otro_core_node);
 void stop_being_core_node();
+//void interface_GHS_and_Self_healing();
+
 
 
 #endif /* GHS_CO_I_H */

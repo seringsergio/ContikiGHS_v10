@@ -7,16 +7,13 @@
 
 #include "contiki.h"
 #include "lib/list.h"
-//#include "cfs/cfs.h" //Contiki File System (CFS)
-
 
 
 /*------------------------------------------------------------------- */
 /*-----------DEBUG-------------------------------------------------*/
 /*------------------------------------------------------------------- */
 
- // MY_DEBUG 1 gasta 10k de ROM en la seccion .text "msp430-size example-ghs_neigh.sky"
-#define MY_DEBUG 0
+#define MY_DEBUG 1
 #if MY_DEBUG
 #include <stdio.h>
 #define MY_DBG(...) printf(__VA_ARGS__)

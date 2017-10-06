@@ -25,3 +25,6 @@ minicom -s
 
 // Que no se apague la pantalla
 xfce4-power-manager
+
+//Para saber el tamaño del codigo
+msp430-size example-ghs_neigh.sky 

@@ -294,7 +294,7 @@ PROCESS_THREAD(e_LWOE, ev, data)
                                 nd.state = FOUND;   //Para saber en que estado estoy en cualquier parte
                                 //paso a END
                                 //process_post(&master_co_i, e_msg_ghs_end, NULL);
-                                print_final_result();
+                                //print_final_result();
                             }else //No he terminado aun los 2 reportes NO son infinito
                             {
                                     MY_DBG("nd.lwoe.node.weight=%d.%02d <= nd.lwoe.children.weight=%d.%02d \n",

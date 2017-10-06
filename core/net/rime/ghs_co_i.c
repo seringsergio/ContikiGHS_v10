@@ -98,6 +98,7 @@ void print_final_result()
        }
    }
 
+   // Como el resultado ya es el final. Entonces lo guardo en un archivo del Contiki File System (CFS)
    process_post(&interface_GHS_and_Self_healing, PROCESS_EVENT_CONTINUE, NULL);
    //interface_GHS_and_Self_healing(); //Cuando llamo un final result lleno la interface con self-healing
 
